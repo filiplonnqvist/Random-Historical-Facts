@@ -1,0 +1,31 @@
+{
+  "name": "random-historical-facts",
+  "version": "1.0.0",
+  "description": "Random historical facts to entertain users while waiting",
+  "type": "module",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "node test/test.js",
+    "lint": "npx eslint ./src || exit 0",
+    "lint:fix": "npx eslint ./src --fix || exit 0"
+  },
+  "keywords": [
+    "history",
+    "facts",
+    "entertainment", 
+    "loading",
+    "random",
+    "historical"
+  ],
+  "contributors": [
+    "Filip Lönnqvist <fl223km@student.lnu.se>"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/filiplonnqvist/Random-Historical-Facts.git"
+  },
+  "devDependencies": {
+    "@lnu/eslint-config": "^1.1.10"
+  }
+}
