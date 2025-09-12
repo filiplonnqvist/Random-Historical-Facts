@@ -5,6 +5,22 @@
  * @version 1.0.0
  */
 
+/**
+ * A single historical fact item.
+ * Negative `year` denotes BC.
+ * @typedef {Object} HistoricalFact
+ * @property {number} id - Unique identifier for the fact.
+ * @property {string} fact - The historical fact text.
+ * @property {string} imageUrl - URL to an image related to the fact.
+ * @property {string[]} tags - Tags categorizing the fact.
+ * @property {string} period - The historical period of the fact (e.g., "30 BC", "40 AD").
+ * @property {number} year - The year associated with the fact (negative for BC).
+ */
+
+/**
+ * An array of historical facts.
+ * @type {HistoricalFact[]}
+ */
 export const historicalFacts = [
   {
     id: 1,
