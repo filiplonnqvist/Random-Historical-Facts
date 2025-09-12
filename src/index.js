@@ -28,4 +28,20 @@ export class RandomHistoricalFacts {
     const randomIndex = Math.floor(Math.random() * this.facts.length)
     return this.facts[randomIndex]
   }
+
+  /**
+   * Get all historical facts.
+   * @returns {Object[]} A copy of all historical facts.
+   */
+  getAllFacts() {
+    return [...this.facts]
+  }
+
+  /**
+   * Get the total number of historical facts available.
+   * @returns {number} The total number of historical facts available.
+   */
+  getFactsCount() {
+    return this.facts.length
+  }
 }

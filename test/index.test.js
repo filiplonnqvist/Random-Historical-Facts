@@ -4,7 +4,7 @@ import { RandomHistoricalFacts } from '../src/index.js'
 // OBS: Om din metod är static MÅSTE du ha static data i klassen:
 // export class RandomHistoricalFacts { static facts = [...historicalFacts]; static getRandomFact() { ... } }
 
-function printFact(f) {
+function printRandomFact(f) {
   console.log('\n🎲 Random historical fact')
   console.log(`ID: ${f.id}`)
   console.log(f.fact)
@@ -12,14 +12,11 @@ function printFact(f) {
   console.log(`Tags: ${f.tags.join(', ')}`)
   console.log(`Image: ${f.imageUrl}\n`)
 }
+const RandomHistoricalFactsInstance = new RandomHistoricalFacts()
+const fact = RandomHistoricalFactsInstance.getRandomFact()
+printRandomFact(fact)
 
-// 
-let fact
-if (typeof RandomHistoricalFacts.getRandomFact === 'function') {
-  fact = RandomHistoricalFacts.getRandomFact()        // static-variant
-} else {
-  const store = new RandomHistoricalFacts()           // instans-variant
-  fact = store.getRandomFact()
+function printFactsCount(c) {
+  console.log(`📚 Total historical facts available: ${c}\n`)
 }
-
-printFact(fact)
+printFactsCount(RandomHistoricalFactsInstance.getFactsCount())
