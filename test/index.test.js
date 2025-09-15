@@ -21,12 +21,15 @@ function printFactsCount(count) {
 printFactsCount(RandomHistoricalFactsInstance.getFactsCount())
 
 // Print all facts
-function printAllFacts(allFacts) {
-  console.log('\n # All historical facts')
+// function printAllFacts(allFacts) {
+//   console.log('\n # All historical facts')
 
-  for (const fact of allFacts) {
-    console.log(fact.fact)
-  }
-}
+//   for (const fact of allFacts) {
+//     console.log(fact.fact)
+//   }
+// }
 
-printAllFacts(RandomHistoricalFactsInstance.getAllFacts())
+// printAllFacts(RandomHistoricalFactsInstance.getAllFacts())
+
+// Print selected tags
+console.log('Tags for "ancient":', RandomHistoricalFactsInstance.getFactsByTag('ancient').length)

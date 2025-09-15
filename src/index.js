@@ -53,4 +53,25 @@ export class RandomHistoricalFacts {
     return this.facts.length
   }
 
+  getFactsByTag(tag) {
+    if (typeof tag !== 'string') {
+      throw new Error('Tag must be a string')
+    }
+
+    const normalizedTag = tag.toLowerCase().trim()
+    const result = []
+
+    for (const fact of this.facts) {
+      if (!fact.tags) continue
+
+      for (const factTag of fact.tags) {
+        if (factTag.toLowerCase().trim() === normalizedTag) {
+          result.push(fact)
+          break
+        }
+      }
+  }
+      return result
+
+  }
 }
