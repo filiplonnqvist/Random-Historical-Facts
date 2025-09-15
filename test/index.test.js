@@ -1,8 +1,4 @@
-// ESM, du har "type": "module"
 import { RandomHistoricalFacts } from '../src/index.js'
-
-// OBS: Om din metod är static MÅSTE du ha static data i klassen:
-// export class RandomHistoricalFacts { static facts = [...historicalFacts]; static getRandomFact() { ... } }
 
 function printRandomFact(f) {
   console.log('\n🎲 Random historical fact')

@@ -8,7 +8,6 @@
 import { historicalFacts } from './data/facts.js'
 
 export class RandomHistoricalFacts {
-
     /**
      * Creates an instance of RandomHistoricalFacts.
      * @throws {Error} If there are no historical facts available.
@@ -20,28 +19,37 @@ export class RandomHistoricalFacts {
             throw new Error('No historical facts available.')
         }
     }
-  /**
-   * Get a random historical fact.
-   * @returns {Object} A random historical fact object.
-   */
+
   getRandomFact() {
+    if (this.facts.length === 0) {
+      throw new Error('No historical facts available.')
+    }
+
     const randomIndex = Math.floor(Math.random() * this.facts.length)
-    return this.facts[randomIndex]
+    return { ...this.facts[randomIndex] } // Return a copy to prevent external mutation
   }
 
-  /**
-   * Get all historical facts.
-   * @returns {Object[]} A copy of all historical facts.
-   */
+  getFactById(id) {
+    if (typeof id !== 'number' || isNaN(id) || id <= 0) {
+      throw new Error('ID must be a positive number.')
+    }
+    for (const fact of this.facts) {
+      if (fact.id === id) {
+        return { ...fact } // Return a copy to prevent external mutation
+      }
+    }
+    return null
+  }
+
   getAllFacts() {
+    if (this.facts.length === 0) {
+      throw new Error('No historical facts available.')
+    }
     return [...this.facts]
   }
 
-  /**
-   * Get the total number of historical facts available.
-   * @returns {number} The total number of historical facts available.
-   */
   getFactsCount() {
     return this.facts.length
   }
+
 }
