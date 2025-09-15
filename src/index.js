@@ -64,4 +64,12 @@ export class RandomHistoricalFacts {
       return result
 
   }
+
+  getFactsByPeriod(period) {
+    if (typeof period !== 'string') {
+      throw new Error('Period must be a string')
+    }
+
+    const normalizePeriod = period.toLowerCase
+}
 }
