@@ -12,7 +12,7 @@
   "keywords": [
     "history",
     "facts",
-    "entertainment", 
+    "entertainment",
     "loading",
     "random",
     "historical"
@@ -26,6 +26,9 @@
     "url": "https://github.com/filiplonnqvist/Random-Historical-Facts.git"
   },
   "devDependencies": {
-    "@lnu/eslint-config": "^1.1.10"
+    "@eslint/js": "^9.35.0",
+    "@lnu/eslint-config": "^1.1.10",
+    "eslint": "^9.35.0",
+    "globals": "^16.4.0"
   }
 }

@@ -2,13 +2,13 @@ import { historicalFacts } from './data/facts.js'
 
 export class RandomHistoricalFacts {
 
-    constructor() {
-        this.facts = [...historicalFacts]
+  constructor() {
+    this.facts = [...historicalFacts]
 
-        if (this.facts.length === 0 || !this.facts) {
-            throw new Error('No historical facts available.')
-        }
+    if (this.facts.length === 0 || !this.facts) {
+      throw new Error('No historical facts available.')
     }
+  }
 
   getRandomFact() {
     if (this.facts.length === 0) {
@@ -60,8 +60,8 @@ export class RandomHistoricalFacts {
           break
         }
       }
-  }
-      return result
+    }
+    return result
 
   }
 
@@ -70,6 +70,15 @@ export class RandomHistoricalFacts {
       throw new Error('Period must be a string')
     }
 
-    const normalizePeriod = period.toLowerCase
+    const normalizedPeriod = period.toLowerCase().trim()
+    const result = []
+
+    for (const fact of this.facts) {
+      if (fact.period === normalizedPeriod) {
+        result.push(fact)
+      }
+  }
+  return result
+  // TODO: Make sure to filter out other info
 }
 }

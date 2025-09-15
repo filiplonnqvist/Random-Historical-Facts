@@ -15,10 +15,10 @@ const fact = RandomHistoricalFactsInstance.getRandomFact()
 printRandomFact(fact)
 
 // Print facts count
-// function printFactsCount(count) {
-//   console.log(`📚 Total historical facts available: ${count}\n`)
-// }
-// printFactsCount(RandomHistoricalFactsInstance.getFactsCount())
+function printFactsCount(count) {
+  console.log(`📚 Total historical facts available: ${count}\n`)
+}
+printFactsCount(RandomHistoricalFactsInstance.getFactsCount())
 
 // Print all facts
 // function printAllFacts(allFacts) {
@@ -32,4 +32,7 @@ printRandomFact(fact)
 // printAllFacts(RandomHistoricalFactsInstance.getAllFacts())
 
 // Print selected tags
-// console.log('Tags for "medieval":', RandomHistoricalFactsInstance.getFactsByTag('medieval'))
+// console.log('Tags for "art":', RandomHistoricalFactsInstance.getFactsByTag('art '))
+
+// Print selected periods
+console.log('Period: "medieval":', RandomHistoricalFactsInstance.getFactsByPeriod('medieval '))

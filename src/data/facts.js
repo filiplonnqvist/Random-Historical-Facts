@@ -22,8 +22,21 @@
  * @type {HistoricalFact[]}
  */
 export const historicalFacts = [
-  {
+
+  // Prehistoric
+
+    {
     id: 1,
+    fact: "Did you know that Göbekli Tepe in modern-day Turkey is the world's oldest known temple, built around 9600 BC — thousands of years before Stonehenge or the pyramids?",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/e/e8/G%C3%B6bekli_Tepe_12_November_2022.jpg",
+    tags: ["turkey", "architecture", "religion", "temple"],
+    period: "prehistoric",
+    year: -9600
+  },
+
+  // Ancient
+  {
+    id: 2,
     fact: "Did you know that Egyptian queen Cleopatra lived closer in time to the invention of the iPhone than to the building of the Great Pyramid of Giza?",
     imageUrl: "https://upload.wikimedia.org/wikipedia/commons/3/3e/Kleopatra-VII.-Altes-Museum-Berlin1.jpg",
     tags: ["queen", "egypt", "culture", "pyramid"],
@@ -31,7 +44,7 @@ export const historicalFacts = [
     year: -30
   },
   {
-    id: 2,
+    id: 3,
     fact: "Did you know that the Roman Emperor Caligula loved his horse Incitatus so much that he gave it a marble stable, servants, and even planned to make it a senator?",
     imageUrl: "https://upload.wikimedia.org/wikipedia/commons/0/0e/Portrait_Head_of_Caligula_-_Getty_Museum_%2872.AA.155%29.jpg",
     tags: ["emporer", "rome", "culture", "politics"],
@@ -39,20 +52,12 @@ export const historicalFacts = [
     year: 40
   },
   {
-    id: 3,
+    id: 4,
     fact: "Did you know that Boudica, a woman in Iron Age Britain, united rival tribes and rose up against the Roman occupiers, burning London to the ground in 60 AD?",
     imageUrl: "https://upload.wikimedia.org/wikipedia/commons/6/64/Boadicea_Haranguing_the_Britons_%28called_Boudicca%2C_or_Boadicea%29_by_John_Opie.jpg",
     tags: ["london", "war", "britain"],
     period: "ancient",
     year: 60
-  },
-  {
-    id: 4,
-    fact: "Did you know that Göbekli Tepe in modern-day Turkey is the world's oldest known temple, built around 9600 BC — thousands of years before Stonehenge or the pyramids?",
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/e/e8/G%C3%B6bekli_Tepe_12_November_2022.jpg",
-    tags: ["turkey", "architecture", "religion", "temple"],
-    period: "Prehistoric",
-    year: -9600
   },
   {
     id: 5,
@@ -96,6 +101,8 @@ export const historicalFacts = [
     period: "medieval",
     year: 1485
   },
+
+  // Renaissance
   {
     id: 10,
     fact: "Did you know that Leonardo da Vinci never actually finished his masterpiece, the Mona Lisa — which remained in his studio until his death?",
@@ -104,8 +111,6 @@ export const historicalFacts = [
     period: "renaissance",
     year: 1503
   },
-  
-  // 1500s
   {
     id: 11,
     fact: "Did you know that the first modern flushing toilet was invented in 1596 by Sir John Harington, godson of Queen Elizabeth I?",
@@ -147,7 +152,7 @@ export const historicalFacts = [
     year: 1523
   },
   
-  // 1600-1700s
+  // Early Modern
   {
     id: 16,
     fact: "Did you know that Peter the Great of Russia introduced a beard tax in 1698 — forcing men to shave or pay a fine if they wanted to keep their facial hair?",
