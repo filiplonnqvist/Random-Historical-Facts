@@ -26,16 +26,17 @@ export class RandomHistoricalFacts {
     }
 
     const randomIndex = Math.floor(Math.random() * this.facts.length)
-    return { ...this.facts[randomIndex] } // Return a copy to prevent external mutation
+    return this.facts[randomIndex] // Return a copy to prevent external mutation
   }
 
   getFactById(id) {
     if (typeof id !== 'number' || isNaN(id) || id <= 0) {
       throw new Error('ID must be a positive number.')
     }
+
     for (const fact of this.facts) {
       if (fact.id === id) {
-        return { ...fact } // Return a copy to prevent external mutation
+        return { ...fact }
       }
     }
     return null

@@ -1,18 +1,32 @@
 import { RandomHistoricalFacts } from '../src/index.js'
 
-function printRandomFact(f) {
+function printRandomFact(randomFact) {
+  console.log(typeof randomFact)
+  console.log(Array.isArray(randomFact))
   console.log('\n🎲 Random historical fact')
-  console.log(`ID: ${f.id}`)
-  console.log(f.fact)
-  console.log(`Period: ${f.period} (year: ${f.year})`)
-  console.log(`Tags: ${f.tags.join(', ')}`)
-  console.log(`Image: ${f.imageUrl}\n`)
+  console.log(`ID: ${randomFact.id}`)
+  console.log(randomFact.fact)
+  console.log(`Period: ${randomFact.period} (year: ${randomFact.year})`)
+  console.log(`Tags: ${randomFact.tags.join(', ')}`)
+  console.log(`Image: ${randomFact.imageUrl}\n`)
 }
 const RandomHistoricalFactsInstance = new RandomHistoricalFacts()
 const fact = RandomHistoricalFactsInstance.getRandomFact()
 printRandomFact(fact)
 
-function printFactsCount(c) {
-  console.log(`📚 Total historical facts available: ${c}\n`)
+// Print facts count
+function printFactsCount(count) {
+  console.log(`📚 Total historical facts available: ${count}\n`)
 }
 printFactsCount(RandomHistoricalFactsInstance.getFactsCount())
+
+// Print all facts
+function printAllFacts(allFacts) {
+  console.log('\n # All historical facts')
+
+  for (const fact of allFacts) {
+    console.log(fact.fact)
+  }
+}
+
+printAllFacts(RandomHistoricalFactsInstance.getAllFacts())
