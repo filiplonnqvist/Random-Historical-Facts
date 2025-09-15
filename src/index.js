@@ -1,17 +1,7 @@
-/**
- * @file Main module for Random Historical Facts NPM package.
- * @module random-historical-facts
- * @author Filip Lönnqvist <fl223km@student.lnu.se>
- * @version 1.0.0
- */
-
 import { historicalFacts } from './data/facts.js'
 
 export class RandomHistoricalFacts {
-    /**
-     * Creates an instance of RandomHistoricalFacts.
-     * @throws {Error} If there are no historical facts available.
-     */
+
     constructor() {
         this.facts = [...historicalFacts]
 
