@@ -48,17 +48,20 @@ export class RandomHistoricalFacts {
       throw new Error('Tag must be a string')
     }
 
-    const normalizedTag = tag.toLowerCase().trim()
     const result = []
 
     for (const fact of this.facts) {
       if (!fact.tags) continue
 
       for (const factTag of fact.tags) {
-        if (factTag.toLowerCase().trim() === normalizedTag) {
-          result.push(fact)
+        if (factTag.toLowerCase().trim() === tag.toLowerCase().trim()) {
+          result.push({ ...fact })
           break
         }
+      }
+
+      if (result === 0) {
+        throw new Error('Tag not found')
       }
     }
     return result
@@ -70,13 +73,16 @@ export class RandomHistoricalFacts {
       throw new Error('Period must be a string')
     }
 
-    const normalizedPeriod = period.toLowerCase().trim()
     const result = []
 
     for (const fact of this.facts) {
-      if (fact.period === normalizedPeriod) {
-        result.push(fact)
+      if (fact.period.toLowerCase().trim() === period.toLowerCase().trim()) {
+        result.push({ ...fact })
       }
+    }
+
+    if (result === 0) {
+      throw new Error('Period not found. Please choose between "prehistoric", "ancient", "middle ages", "renaissance" or "early modern"')
     }
     return result
   }
@@ -89,11 +95,10 @@ export class RandomHistoricalFacts {
     const result = []
 
     for (const fact of this.facts) {
-      if (fact.year < year) {
-        result.push(fact)
+      if (fact.year <= year) {
+        result.push({ ...fact })
       }
     }
-    console.log('Found facts:', result.length)  // <-- Och detta!
 
     if (result.length === 0) {
       throw new Error(`No facts before year ${year}`)
@@ -110,7 +115,7 @@ export class RandomHistoricalFacts {
 
     for (const fact of this.facts) {
       if (fact.year >= year) {
-        result.push(fact)
+        result.push({ ...fact })
       }
     }
 
