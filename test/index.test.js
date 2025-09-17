@@ -32,12 +32,12 @@ printFactsCount(RandomHistoricalFactsInstance.getFactsCount())
 // printAllFacts(RandomHistoricalFactsInstance.getAllFacts())
 
 // Print selected tags
-// console.log('Tags for "art":', RandomHistoricalFactsInstance.getFactsByTag('art '))
+// console.log('Tags for "art":', RandomHistoricalFactsInstance.getFactsByTag('art'))
 
 // Print selected periods
-console.log('Period: "medieval":', RandomHistoricalFactsInstance.getFactsByPeriod('medieval'))
+// console.log('Period: "medieval":', RandomHistoricalFactsInstance.getFactsByPeriod('medieval'))
 
-// console.log('Period: "time before":', RandomHistoricalFactsInstance.getFactsBeforeYear(-30))
+console.log('Period: "time before":', RandomHistoricalFactsInstance.getFactsBeforeYear(-30))
 
 // console.log('Period: "time after":', RandomHistoricalFactsInstance.getFactsAfterYear(1600))
 

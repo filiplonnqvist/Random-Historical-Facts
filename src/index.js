@@ -6,13 +6,13 @@ export class RandomHistoricalFacts {
     this.facts = [...historicalFacts]
 
     if (this.facts.length === 0 || !this.facts) {
-      throw new Error('No historical facts available.')
+      throw new Error('No historical facts available')
     }
   }
 
   getRandomFact() {
     if (this.facts.length === 0) {
-      throw new Error('No historical facts available.')
+      throw new Error('No historical facts available')
     }
 
     const randomIndex = Math.floor(Math.random() * this.facts.length)
@@ -21,7 +21,7 @@ export class RandomHistoricalFacts {
 
   getFactById(id) {
     if (typeof id !== 'number' || isNaN(id) || id <= 0) {
-      throw new Error('ID must be a positive number.')
+      throw new Error('ID must be a positive number')
     }
 
     for (const fact of this.facts) {
@@ -34,7 +34,7 @@ export class RandomHistoricalFacts {
 
   getAllFacts() {
     if (this.facts.length === 0) {
-      throw new Error('No historical facts available.')
+      throw new Error('No historical facts available')
     }
     return [...this.facts]
   }
@@ -43,22 +43,13 @@ export class RandomHistoricalFacts {
     return this.facts.length
   }
 
-  getFactsByTag(tag) {
-    if (typeof tag !== 'string') {
-      throw new Error('Tag must be a string')
-    }
-
-    const result = []
+  getFactsByTag(desiredTag) {
+    let result = []
 
     for (const fact of this.facts) {
       if (!fact.tags) continue
 
-      for (const factTag of fact.tags) {
-        if (factTag.toLowerCase().trim() === tag.toLowerCase().trim()) {
-          result.push({ ...fact })
-          break
-        }
-      }
+      result = this.#getAllMatchingTags(result, fact, desiredTag)
 
       if (result === 0) {
         throw new Error('Tag not found')
@@ -68,21 +59,41 @@ export class RandomHistoricalFacts {
 
   }
 
-  getFactsByPeriod(period) {
-    if (typeof period !== 'string') {
-      throw new Error('Period must be a string')
-    }
-
-    const result = []
-
-    for (const fact of this.facts) {
-      if (fact.period.toLowerCase().trim() === period.toLowerCase().trim()) {
+  #getAllMatchingTags(result, fact, desiredTag) {
+    for (const factTag of fact.tags) {
+      if (this.#isMatchingOutput(factTag, desiredTag)) {
         result.push({ ...fact })
+        break
       }
     }
+    return result
+  }
 
-    if (result === 0) {
-      throw new Error('Period not found. Please choose between "prehistoric", "ancient", "middle ages", "renaissance" or "early modern"')
+  #isMatchingOutput(existingOutput, desiredOutput) {
+    return existingOutput.toLowerCase().trim() === desiredOutput.toLowerCase().trim()
+  }
+
+  getFactsByPeriod(desiredPeriod) {
+    let result = []
+
+    for (const fact of this.facts) {
+      if (!fact.tags) continue
+
+      result = this.#getAllMatchingPeriods(result, fact, desiredPeriod)
+      
+      if (result === 0) {
+        throw new Error('Period not found. Please choose between "prehistoric", "ancient", "middle ages", "renaissance" or "early modern"')
+      }
+    }
+    return result
+  }
+
+  #getAllMatchingPeriods(result, fact, desiredPeriod) {
+    for (const factTag of fact.period) {
+      if (this.#isMatchingOutput(factTag, desiredPeriod)) {
+        result.push({ ...fact })
+        break
+      }
     }
     return result
   }
@@ -123,5 +134,13 @@ export class RandomHistoricalFacts {
       throw new Error(`No facts after year ${year}`)
     }
     return result
+  }
+
+  getFactsSortedByYear() {
+    if (this.facts.length === 0) {
+      throw new Error('No historical facts available')
+    }
+
+
   }
 }
