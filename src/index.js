@@ -16,7 +16,7 @@ export class RandomHistoricalFacts {
     }
 
     const randomIndex = Math.floor(Math.random() * this.facts.length)
-    return this.facts[randomIndex] // Return a copy to prevent external mutation
+    return this.facts[randomIndex]
   }
 
   getFactById(id) {
@@ -77,8 +77,46 @@ export class RandomHistoricalFacts {
       if (fact.period === normalizedPeriod) {
         result.push(fact)
       }
+    }
+    return result
   }
-  return result
-  // TODO: Make sure to filter out other info
-}
+
+  getFactsBeforeYear(year) {
+    if (typeof year !== 'number') {
+      throw new Error('Year must be a number')
+    }
+
+    const result = []
+
+    for (const fact of this.facts) {
+      if (fact.year < year) {
+        result.push(fact)
+      }
+    }
+    console.log('Found facts:', result.length)  // <-- Och detta!
+
+    if (result.length === 0) {
+      throw new Error(`No facts before year ${year}`)
+    }
+    return result
+  }
+
+  getFactsAfterYear(year) {
+    if (typeof year !== 'number') {
+      throw new Error('Year must be a number')
+    }
+
+    const result = []
+
+    for (const fact of this.facts) {
+      if (fact.year >= year) {
+        result.push(fact)
+      }
+    }
+
+    if (result.length === 0) {
+      throw new Error(`No facts after year ${year}`)
+    }
+    return result
+  }
 }
