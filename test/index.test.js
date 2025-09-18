@@ -41,3 +41,8 @@ printFactsCount(RandomHistoricalFactsInstance.getFactsCount())
 
 // console.log('Period: "time after":', RandomHistoricalFactsInstance.getFactsAfterYear(1600))
 
+// console.log('Sorted facts by year:', RandomHistoricalFactsInstance.getFactsSortedAscendingByYear())
+// console.log('Sorted facts by year (desc):', RandomHistoricalFactsInstance.getFactsSortedDescendingByYear())
+
+console.log('Fact by ID:', RandomHistoricalFactsInstance.getFactById(2))
+

@@ -9,25 +9,39 @@ export class RandomHistoricalFacts {
       throw new Error('No historical facts available')
     }
   }
-  
-  // Returns a random historical fact
-  getRandomFact() {
+
+  #validateFactsAvailability() {
     if (this.facts.length === 0) {
       throw new Error('No historical facts available')
     }
+  }
 
-    const randomIndex = Math.floor(Math.random() * this.facts.length)
-    return {...this.facts[randomIndex]}
+  #validateNumbers() {
+    if (typeof year !== 'number') {
+      throw new Error('Year must be a number')
+    }
+  }
+
+  #validateId(id){
+    if (typeof id !== 'number' || isNaN(id) || id <= 0) {
+      throw new Error('ID must be a positive number')
+    }
+  }
+
+  // Returns a random historical fact
+  getRandomFact() {
+    this.#validateFactsAvailability()
+
+    const randomIndex = Math.floor(Math.random() * this.facts.length) // Generate a random index
+    return { ...this.facts[randomIndex] }
   }
 
   // Returns a historical fact by its ID
   getFactById(id) {
-    if (typeof id !== 'number' || isNaN(id) || id <= 0) {
-      throw new Error('ID must be a positive number')
-    }
+    this.#validateId(id)
 
-    for (const fact of this.facts) {
-      if (fact.id === id) {
+    for (const fact of this.facts) { // Loop through each fact
+      if (fact.id === id) { // If the ID matches, return the fact
         return { ...fact }
       }
     }
@@ -36,10 +50,14 @@ export class RandomHistoricalFacts {
 
   // Returns all historical facts
   getAllFacts() {
-    if (this.facts.length === 0) {
-      throw new Error('No historical facts available')
+    this.#validateFactsAvailability()
+
+    const result = []
+
+    for (const fact of this.facts) { // Loop through each fact
+      result.push({ ...fact }) // Add a copy of all facts to the result array
     }
-    return [...this.facts]
+    return result
   }
 
   // Returns the total number of historical facts
@@ -53,15 +71,12 @@ export class RandomHistoricalFacts {
 
     for (const fact of this.facts) { // Loop through each fact
       if (!fact.tags) continue // Skip if there are no tags
-
       result = this.#getMatchingTags(result, fact, desiredTag) // Check if any tag matches the desired tag
-
-      if (result.length === 0) {
-        throw new Error('Tag not found')
-      }
+    }
+    if (result.length === 0) {
+      throw new Error('Tag not found')
     }
     return result
-
   }
 
   // Private method to check for matching tags in a fact
@@ -98,9 +113,7 @@ export class RandomHistoricalFacts {
 
   // Returns historical facts before a specific year
   getFactsBeforeYear(year) {
-    if (typeof year !== 'number') {
-      throw new Error('Year must be a number')
-    }
+    this.#validateNumbers()
 
     const result = []
 
@@ -109,7 +122,6 @@ export class RandomHistoricalFacts {
         result.push({ ...fact })
       }
     }
-
     if (result.length === 0) {
       throw new Error(`No facts before year ${year}`)
     }
@@ -118,9 +130,7 @@ export class RandomHistoricalFacts {
 
   // Returns historical facts after a specific year
   getFactsAfterYear(year) {
-    if (typeof year !== 'number') {
-      throw new Error('Year must be a number')
-    }
+    this.#validateNumbers()
 
     const result = []
 
@@ -129,18 +139,33 @@ export class RandomHistoricalFacts {
         result.push({ ...fact })
       }
     }
-
     if (result.length === 0) {
       throw new Error(`No facts after year ${year}`)
     }
     return result
   }
 
-  getFactsSortedByYear() {
-    if (this.facts.length === 0) {
-      throw new Error('No historical facts available')
+  // Returns historical facts sorted by year in ascending order
+  getFactsSortedAscendingByYear() {
+    return this.#sortByYear(true)
+
+  }
+
+  // Returns historical facts sorted by year in descending order
+  getFactsSortedDescendingByYear() {
+    return this.#sortByYear(false)
+  }
+
+  // Private method to sort facts by year
+  #sortByYear(ascending = true) {
+    this.#validateFactsAvailability()
+
+    const result = [...this.facts]
+    if (ascending) { // 
+      result.sort((a, b) => a.year - b.year) // Sort in ascending order
+    } else {
+      result.sort((a, b) => b.year - a.year) // Sort in descending order
     }
-
-
+    return ({ ...result })
   }
 }
