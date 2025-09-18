@@ -16,7 +16,7 @@ export class RandomHistoricalFacts {
     }
   }
 
-  #validateNumbers() {
+  #validateYear(year) {
     if (typeof year !== 'number') {
       throw new Error('Year must be a number')
     }
@@ -113,7 +113,7 @@ export class RandomHistoricalFacts {
 
   // Returns historical facts before a specific year
   getFactsBeforeYear(year) {
-    this.#validateNumbers()
+    this.#validateYear()
 
     const result = []
 
@@ -130,7 +130,7 @@ export class RandomHistoricalFacts {
 
   // Returns historical facts after a specific year
   getFactsAfterYear(year) {
-    this.#validateNumbers()
+    this.#validateYear()
 
     const result = []
 
@@ -166,6 +166,6 @@ export class RandomHistoricalFacts {
     } else {
       result.sort((a, b) => b.year - a.year) // Sort in descending order
     }
-    return ({ ...result })
+    return result
   }
 }
