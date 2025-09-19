@@ -198,22 +198,21 @@ export class RandomHistoricalFacts {
     return result
   }
 
-
   /**
    * Returns historical facts before a specific year.
    * @param {number} year - The year to check.
    * @returns {Array<Object>} An array of historical facts before the specified year.
    */
   getFactsBeforeYear(year) {
-    return this.#filterByYear(year, true)
+    return this.#sortFactsBeforeYear(year, true)
   }
 
   // Returns historical facts after a specific year
   getFactsAfterYear(year) {
-    return this.#filterByYear(year, false)
+    return this.#sortFactsBeforeYear(year, false)
   }
 
-  #filterByYear(year, before = true) {
+  #sortFactsBeforeYear(year, before = true) {
     this.#validateYear(year)
 
     const result = []
@@ -231,17 +230,17 @@ export class RandomHistoricalFacts {
 
   // Returns historical facts sorted by year in ascending order
   getAllFactsSortedAscendingByYear() {
-    return this.#sortByYear(true)
+    return this.#sortFactsByYear(true)
 
   }
 
   // Returns historical facts sorted by year in descending order
   getAllFactsSortedDescendingByYear() {
-    return this.#sortByYear(false)
+    return this.#sortFactsByYear(false)
   }
 
   // Private method to sort facts by year
-  #sortByYear(ascending = true) {
+  #sortFactsByYear(ascending = true) {
     this.#validateFactsAvailability()
 
     const result = [...this.facts]
