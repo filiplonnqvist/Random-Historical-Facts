@@ -1,5 +1,16 @@
+/**
+ * @file Main module for managing and retrieving random historical facts.
+ * @module src/index.js
+ * @author Filip Lönnqvist <fl223km@student.lnu.se>
+ * @version 1.0.0
+ * @license MIT
+ */
+
 import { historicalFacts } from './data/facts.js'
 
+/**
+ * Class representing a collection of random historical facts.
+ */
 export class RandomHistoricalFacts {
 
   constructor() {
@@ -10,25 +21,45 @@ export class RandomHistoricalFacts {
     }
   }
 
+  /**
+   * Private method to validate if there are any historical facts available.
+   * @private
+   * @throws {Error} If there are no historical facts available.
+   */
   #validateFactsAvailability() {
     if (this.facts.length === 0) {
       throw new Error('No historical facts available')
     }
   }
 
+  /**
+   * Private method to validate the year parameter.
+   * @private
+   * @param {number} year - The year to validate.
+   * @throws {Error} If the year is not a number.
+   */
   #validateYear(year) {
     if (typeof year !== 'number') {
       throw new Error('Year must be a number')
     }
   }
 
-  #validateId(id){
+  /**
+   * Private method to validate the ID parameter.
+   * @private
+   * @param {number} id - The ID to validate.
+   * @throws {Error} If the ID is not a positive number.
+   */
+  #validateId(id) {
     if (typeof id !== 'number' || isNaN(id) || id <= 0) {
       throw new Error('ID must be a positive number')
     }
   }
 
-  // Returns a random historical fact
+  /**
+   * Returns a random historical fact.
+   * @returns {Object} A random historical fact.
+   */
   getRandomFact() {
     this.#validateFactsAvailability()
 
@@ -36,7 +67,11 @@ export class RandomHistoricalFacts {
     return { ...this.facts[randomIndex] }
   }
 
-  // Returns a historical fact by its ID
+  /**
+   * Returns a historical fact by its ID.
+   * @param {number} id - The ID of the historical fact.
+   * @returns {Object|null} The historical fact or null if not found.
+   */
   getFactById(id) {
     this.#validateId(id)
 
@@ -48,7 +83,10 @@ export class RandomHistoricalFacts {
     return null
   }
 
-  // Returns all historical facts
+  /**
+   * Returns all historical facts.
+   * @returns {Array<Object>} An array of all historical facts.
+   */
   getAllFacts() {
     this.#validateFactsAvailability()
 
@@ -60,12 +98,19 @@ export class RandomHistoricalFacts {
     return result
   }
 
-  // Returns the total number of historical facts
+  /**
+   * Returns the total number of historical facts.
+   * @returns {number} The total number of historical facts.
+   */
   getFactsCount() {
     return this.facts.length
   }
 
-  // Returns historical facts that match a specific tag
+  /**
+   * Returns historical facts that match a specific tag.
+   * @param {string} desiredTag - The tag to match.
+   * @returns {Array<Object>} An array of historical facts that match the tag.
+   */
   getFactsByTag(desiredTag) {
     let result = []
 
@@ -79,7 +124,13 @@ export class RandomHistoricalFacts {
     return result
   }
 
-  // Private method to check for matching tags in a fact
+  /**
+   * Private method to get matching tags from a fact.
+   * @param {Array<Object>} result - The array to store matching facts.
+   * @param {Object} fact - The historical fact to check.
+   * @param {string} desiredTag - The tag to match.
+   * @returns {Array<Object>} The updated array of matching facts.
+   */
   #getMatchingTags(result, fact, desiredTag) {
     for (const factTag of fact.tags) { // Loop through each tag of the fact
       if (this.#isMatchingOutput(factTag, desiredTag)) { // Check if the tag matches the desired tag
@@ -90,12 +141,22 @@ export class RandomHistoricalFacts {
     return result
   }
 
-  // Private method to compare strings case-insensitively and trim whitespace
+  /**
+   * Private method to check if two strings match (case-insensitive and trimmed).
+   * @private
+   * @param {string} existingOutput - The existing output string.
+   * @param {string} desiredOutput - The desired output string.
+   * @returns {boolean} True if the strings match, false otherwise.
+   */
   #isMatchingOutput(existingOutput, desiredOutput) {
     return existingOutput.toLowerCase().trim() === desiredOutput.toLowerCase().trim()
   }
 
-  // Returns historical facts from a specific period  
+  /**
+   * Returns historical facts that match a specific period.
+   * @param {string} desiredPeriod - The period to match.
+   * @returns {Array<Object>} An array of historical facts that match the period.
+   */
   getFactsByPeriod(desiredPeriod) {
     let result = []
 
@@ -111,9 +172,13 @@ export class RandomHistoricalFacts {
   }
 
 
-  // Returns historical facts before a specific year
+  /**
+   * Returns historical facts before a specific year.
+   * @param {number} year - The year to check.
+   * @returns {Array<Object>} An array of historical facts before the specified year.
+   */
   getFactsBeforeYear(year) {
-    this.#validateYear()
+    this.#validateYear(year)
 
     const result = []
 
@@ -130,7 +195,7 @@ export class RandomHistoricalFacts {
 
   // Returns historical facts after a specific year
   getFactsAfterYear(year) {
-    this.#validateYear()
+    this.#validateYear(year)
 
     const result = []
 
