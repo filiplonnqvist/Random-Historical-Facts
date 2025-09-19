@@ -81,12 +81,7 @@ export class RandomHistoricalFacts {
   #findRandomFact(includeAll = true) {
     this.#validateFactsAvailability()
 
-    const familyFriendlyFacts = [] // New array to store family friendly facts only
-    for (const fact of this.facts) {
-      if (!fact.isExplicit) {
-        familyFriendlyFacts.push(fact)
-      }
-    }
+    const familyFriendlyFacts = this.#findFamilyFriendlyFacts()
 
     const randomIndex = Math.floor(Math.random() * this.facts.length) // Index for random fact
     const randomIndexFamilyFriendly = Math.floor(Math.random() * familyFriendlyFacts.length) // Index for random family friendly fact
@@ -96,6 +91,23 @@ export class RandomHistoricalFacts {
     } else {
       return { ...this.facts[randomIndex] }
     }
+  }
+
+  /**
+   * Private method to find all family-friendly facts.
+   * @private
+   * @returns {Array<Object>} An array of all family-friendly historical facts.
+   */
+  #findFamilyFriendlyFacts() {
+    this.#validateFactsAvailability()
+
+    const result = []
+    for (const fact of this.facts) {
+      if (!fact.isExplicit) {
+        result.push(fact)
+      }
+    }
+    return result
   }
 
   /**
