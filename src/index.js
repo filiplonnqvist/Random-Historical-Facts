@@ -61,10 +61,41 @@ export class RandomHistoricalFacts {
    * @returns {Object} A random historical fact.
    */
   getRandomFact() {
+    return this.#findRandomFact(true)
+  }
+
+  /**
+   * Returns a random family-friendly historical fact.
+   * @returns {Object} A random family-friendly historical fact.
+   */
+  getRandomFamilyFriendlyFact() {
+    return this.#findRandomFact(false)
+  }
+
+  /**
+   * Private method to find a random fact with or without explicit content.
+   * @private
+   * @param {boolean} includeAll - Parameter which decides whether or not you want explicit content.
+   * @returns {Object} A random historical fact with or without explicit content.
+   */
+  #findRandomFact(includeAll = true) {
     this.#validateFactsAvailability()
 
-    const randomIndex = Math.floor(Math.random() * this.facts.length) // Generate a random index
-    return { ...this.facts[randomIndex] }
+    const familyFriendlyFacts = [] // New array to store family friendly facts only
+    for (const fact of this.facts) {
+      if (!fact.isExplicit) {
+        familyFriendlyFacts.push(fact)
+      }
+    }
+
+    const randomIndex = Math.floor(Math.random() * this.facts.length) // Index for random fact
+    const randomIndexFamilyFriendly = Math.floor(Math.random() * familyFriendlyFacts.length) // Index for random family friendly fact
+
+    if (!includeAll) { // If explicit content is not allowed, return a random family friendly fact
+      return { ...familyFriendlyFacts[randomIndexFamilyFriendly] }
+    } else {
+      return { ...this.facts[randomIndex] }
+    }
   }
 
   /**
@@ -76,11 +107,18 @@ export class RandomHistoricalFacts {
   }
 
   /**
+   * Return all facts without explicit content.
+   * @returns {Array<Object>} An array of all historical facts without explicit content.
+   */
+  getAllFamilyFriendlyFactsOnly() {
+    return this.#findAllFacts(false)
+  }
+
+  /**
    * Privat method to return facts with or without explicit content.
    * @private
    * @param {boolean} includeAll - Parameter which decides whether or not you want explicit content.
    * @returns {Array<Object>} An array of historical facts with or without explicit content.
-
    */
   #findAllFacts(includeAll = true) {
     this.#validateFactsAvailability()
@@ -95,14 +133,6 @@ export class RandomHistoricalFacts {
       }
     }
     return result
-  }
-
-  /**
-   * Return all facts without explicit content.
-   * @returns {Array<Object>} An array of all historical facts without explicit content.
-   */
-  getAllFamilyFriendlyFactsOnly() {
-    return this.#findAllFacts(false)
   }
 
   /**
@@ -231,11 +261,22 @@ export class RandomHistoricalFacts {
     return this.#sortFactsBeforeYear(year, true)
   }
 
-  // Returns historical facts after a specific year
+  /**
+   * Returns historical facts after a specific year.
+   * @param {number} year - The year to check.
+   * @returns {Array<Object>} An array of historical facts after the specified year.
+   */
   getFactsAfterYear(year) {
     return this.#sortFactsBeforeYear(year, false)
   }
 
+  /**
+   * Private method to sort facts before or after a specific year.
+   * @private
+   * @param {number} year - The year to check.
+   * @param {boolean} before - If true, sort before the year; if false, sort after.
+   * @returns {Array<Object>} An array of historical facts sorted by the specified year.
+   */
   #sortFactsBeforeYear(year, before = true) {
     this.#validateYear(year)
 
@@ -252,24 +293,35 @@ export class RandomHistoricalFacts {
   }
 
 
-  // Returns historical facts sorted by year in ascending order
+  /**
+   * Returns historical facts sorted by year in ascending order.
+   * @returns {Array<Object>} An array of historical facts sorted by year in ascending order.
+   */
   getAllFactsSortedAscendingByYear() {
     return this.#sortFactsByYear(true)
 
   }
 
-  // Returns historical facts sorted by year in descending order
+  /**
+   * Returns historical facts sorted by year in descending order.
+   * @returns {Array<Object>} An array of historical facts sorted by year in descending order.
+   */
   getAllFactsSortedDescendingByYear() {
     return this.#sortFactsByYear(false)
   }
 
-  // Private method to sort facts by year
+  /**
+   * Private method to sort facts by year in ascending or descending order.
+   * @private
+   * @param {boolean} ascending - If true, sort in ascending order; if false, sort in descending order.
+   * @returns {Array<Object>} An array of historical facts sorted by year.
+   */
   #sortFactsByYear(ascending = true) {
     this.#validateFactsAvailability()
 
     const result = [...this.facts]
-    if (ascending) { // 
-      result.sort((a, b) => a.year - b.year) // Sort in ascending order
+    if (ascending) { // Sort in ascending order
+      result.sort((a, b) => a.year - b.year)
     } else {
       result.sort((a, b) => b.year - a.year) // Sort in descending order
     }

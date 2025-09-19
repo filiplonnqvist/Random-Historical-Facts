@@ -32,7 +32,12 @@ printFactsCount(RandomHistoricalFactsInstance.getFactsCount())
 // printAllFacts(RandomHistoricalFactsInstance.getAllFacts())
 
 // console.log('All facts:', RandomHistoricalFactsInstance.getAllFacts())
-console.log('All family friendly facts:', RandomHistoricalFactsInstance.getAllFamilyFriendlyFactsOnly())
+
+// console.log('Random fact:', RandomHistoricalFactsInstance.getRandomFact())
+console.log('Random fact:', RandomHistoricalFactsInstance.getRandomFamilyFriendlyFact())
+
+
+// console.log('All family friendly facts:', RandomHistoricalFactsInstance.getAllFamilyFriendlyFactsOnly())
 
 // Print selected tags
 // console.log('Tags for "art":', RandomHistoricalFactsInstance.getFactsByTag('art'))
