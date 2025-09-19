@@ -31,6 +31,9 @@ printFactsCount(RandomHistoricalFactsInstance.getFactsCount())
 
 // printAllFacts(RandomHistoricalFactsInstance.getAllFacts())
 
+// console.log('All facts:', RandomHistoricalFactsInstance.getAllFacts())
+console.log('All family friendly facts:', RandomHistoricalFactsInstance.getAllFamilyFriendlyFactsOnly())
+
 // Print selected tags
 // console.log('Tags for "art":', RandomHistoricalFactsInstance.getFactsByTag('art'))
 
@@ -39,7 +42,7 @@ printFactsCount(RandomHistoricalFactsInstance.getFactsCount())
 // Print selected periods
 // console.log('Period:', RandomHistoricalFactsInstance.getFactsByPeriod('ancient'))
 
-console.log('Period: "time before":', RandomHistoricalFactsInstance.getFactsBeforeYear(-30,))
+// console.log('Period: "time before":', RandomHistoricalFactsInstance.getFactsBeforeYear(-30,))
 
 // console.log('Period: "time after":', RandomHistoricalFactsInstance.getFactsAfterYear(1600))
 

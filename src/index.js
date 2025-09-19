@@ -68,18 +68,41 @@ export class RandomHistoricalFacts {
   }
 
   /**
- * Returns all historical facts.
- * @returns {Array<Object>} An array of all historical facts.
- */
+   * Returns all historical facts.
+   * @returns {Array<Object>} An array of all historical facts.
+   */
   getAllFacts() {
+    return this.#findAllFacts(true)
+  }
+
+  /**
+   * Privat method to return facts with or without explicit content.
+   * @private
+   * @param {boolean} includeAll - Parameter which decides whether or not you want explicit content.
+   * @returns {Array<Object>} An array of historical facts with or without explicit content.
+
+   */
+  #findAllFacts(includeAll = true) {
     this.#validateFactsAvailability()
 
     const result = []
 
-    for (const fact of this.facts) { // Loop through each fact
-      result.push({ ...fact }) // Add a copy of all facts to the result array
+    for (const fact of this.facts) {
+      if (includeAll) {
+        result.push({ ...fact })
+      } else if (!includeAll && !fact.isExplicit) {
+        result.push({ ...fact })
+      }
     }
     return result
+  }
+
+  /**
+   * Return all facts without explicit content.
+   * @returns {Array<Object>} An array of all historical facts without explicit content.
+   */
+  getAllFamilyFriendlyFactsOnly() {
+    return this.#findAllFacts(false)
   }
 
   /**
@@ -126,6 +149,7 @@ export class RandomHistoricalFacts {
 
   /**
    * Private method to get matching tags from a fact.
+   * @private
    * @param {Array<Object>} result - The array to store matching facts.
    * @param {Object} fact - The historical fact to check.
    * @param {string} desiredTag - The tag to match.
@@ -218,10 +242,10 @@ export class RandomHistoricalFacts {
     const result = []
 
     for (const fact of this.facts) {
-      if (before && fact.year <= year ) {
-          result.push({ ...fact })
+      if (before && fact.year <= year) {
+        result.push({ ...fact })
       } else if (!before && fact.year >= year) {
-          result.push({ ...fact })
+        result.push({ ...fact })
       }
     }
     return result
