@@ -68,6 +68,29 @@ export class RandomHistoricalFacts {
   }
 
   /**
+ * Returns all historical facts.
+ * @returns {Array<Object>} An array of all historical facts.
+ */
+  getAllFacts() {
+    this.#validateFactsAvailability()
+
+    const result = []
+
+    for (const fact of this.facts) { // Loop through each fact
+      result.push({ ...fact }) // Add a copy of all facts to the result array
+    }
+    return result
+  }
+
+  /**
+  * Returns the total number of historical facts.
+  * @returns {number} The total number of historical facts.
+  */
+  getFactsCount() {
+    return this.facts.length
+  }
+
+  /**
    * Returns a historical fact by its ID.
    * @param {number} id - The ID of the historical fact.
    * @returns {Object|null} The historical fact or null if not found.
@@ -81,29 +104,6 @@ export class RandomHistoricalFacts {
       }
     }
     return null
-  }
-
-  /**
-   * Returns all historical facts.
-   * @returns {Array<Object>} An array of all historical facts.
-   */
-  getAllFacts() {
-    this.#validateFactsAvailability()
-
-    const result = []
-
-    for (const fact of this.facts) { // Loop through each fact
-      result.push({ ...fact }) // Add a copy of all facts to the result array
-    }
-    return result
-  }
-
-  /**
-   * Returns the total number of historical facts.
-   * @returns {number} The total number of historical facts.
-   */
-  getFactsCount() {
-    return this.facts.length
   }
 
   /**
@@ -153,6 +153,33 @@ export class RandomHistoricalFacts {
   }
 
   /**
+   * Returns all available tags.
+   * @returns {Array<string>} An array of all available tags.
+   */
+  getAllFactsTags() {
+    let result = new Set() // Store result in array to avoid duplicates
+
+    for (const fact of this.facts) {
+      result = this.#extractTagsFromFacts(result, fact)
+    }
+    return Array.from(result)
+  }
+
+  /**
+   * Private method to extract tags from a fact and add them to the result set.
+   * @private
+   * @param {Set<string>} result The set of strings to add to the result.
+   * @param {Object} fact The historical fact to check.
+   * @returns {Set<string>} The updated set of tags.
+   */
+  #extractTagsFromFacts(result, fact) {
+    for (const factTag of fact.tags) {
+      result.add(factTag)
+    }
+    return result
+  }
+
+  /**
    * Returns historical facts that match a specific period.
    * @param {string} desiredPeriod - The period to match.
    * @returns {Array<Object>} An array of historical facts that match the period.
@@ -178,46 +205,38 @@ export class RandomHistoricalFacts {
    * @returns {Array<Object>} An array of historical facts before the specified year.
    */
   getFactsBeforeYear(year) {
-    this.#validateYear(year)
-
-    const result = []
-
-    for (const fact of this.facts) { // Loop through each fact
-      if (fact.year <= year) { // Check if the year is before or equal to the specified year
-        result.push({ ...fact })
-      }
-    }
-    if (result.length === 0) {
-      throw new Error(`No facts before year ${year}`)
-    }
-    return result
+    return this.#filterByYear(year, true)
   }
 
   // Returns historical facts after a specific year
   getFactsAfterYear(year) {
+    return this.#filterByYear(year, false)
+  }
+
+  #filterByYear(year, before = true) {
     this.#validateYear(year)
 
     const result = []
 
-    for (const fact of this.facts) { // Loop through each fact
-      if (fact.year >= year) { // Check if the year is after or equal to the specified year
-        result.push({ ...fact })
+    for (const fact of this.facts) {
+      if (before && fact.year <= year ) {
+          result.push({ ...fact })
+      } else if (!before && fact.year >= year) {
+          result.push({ ...fact })
       }
-    }
-    if (result.length === 0) {
-      throw new Error(`No facts after year ${year}`)
     }
     return result
   }
 
+
   // Returns historical facts sorted by year in ascending order
-  getFactsSortedAscendingByYear() {
+  getAllFactsSortedAscendingByYear() {
     return this.#sortByYear(true)
 
   }
 
   // Returns historical facts sorted by year in descending order
-  getFactsSortedDescendingByYear() {
+  getAllFactsSortedDescendingByYear() {
     return this.#sortByYear(false)
   }
 

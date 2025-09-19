@@ -25,7 +25,7 @@ export const historicalFacts = [
 
   // Prehistoric
 
-    {
+  {
     id: 1,
     fact: "Did you know that Göbekli Tepe in modern-day Turkey is the world's oldest known temple, built around 9600 BC — thousands of years before Stonehenge or the pyramids?",
     imageUrl: "https://upload.wikimedia.org/wikipedia/commons/e/e8/G%C3%B6bekli_Tepe_12_November_2022.jpg",
@@ -56,6 +56,7 @@ export const historicalFacts = [
     fact: "Did you know that Boudica, a woman in Iron Age Britain, united rival tribes and rose up against the Roman occupiers, burning London to the ground in 60 AD?",
     imageUrl: "https://upload.wikimedia.org/wikipedia/commons/6/64/Boadicea_Haranguing_the_Britons_%28called_Boudicca%2C_or_Boadicea%29_by_John_Opie.jpg",
     tags: ["london", "war", "britain"],
+    isExplicit: true,
     period: "ancient",
     year: 60
   },
@@ -67,7 +68,7 @@ export const historicalFacts = [
     period: "ancient",
     year: -323
   },
-  
+
   // Middle Ages
   {
     id: 6,
@@ -82,7 +83,8 @@ export const historicalFacts = [
     fact: "Did you know that during the Black Death of 1347–1351, cities like Florence lost more than half their people, while Milan escaped almost untouched thanks to strict quarantine measures?",
     imageUrl: "https://upload.wikimedia.org/wikipedia/commons/a/a7/Nuremberg_chronicles_-_Dance_of_Death_%28CCLXIIIIv%29.jpg",
     tags: ["pandemic", "disease", "catastrophe"],
-    period: "medieval", 
+    isExplicit: true,
+    period: "medieval",
     year: 1347
   },
   {
@@ -124,6 +126,7 @@ export const historicalFacts = [
     fact: "Did you know that in the 1500s, people believed they could cure syphilis by drinking mercury — which of course only made things worse?",
     imageUrl: "https://upload.wikimedia.org/wikipedia/commons/a/a9/Albrecht_D%C3%BCrer_-_Christ_Disputing_with_Doctors_-_1959.99.16_-_Cleveland_Museum_of_Art.tif",
     tags: ["medicine", "culture", "disease"],
+    isExplicit: true,
     period: "renaissance",
     year: 1500
   },
@@ -140,6 +143,7 @@ export const historicalFacts = [
     fact: "Did you know that Ivan the Terrible, crowned Russia's first tsar in 1547, killed his own son in a fit of rage — leaving the empire without a stable heir?",
     imageUrl: "https://upload.wikimedia.org/wikipedia/commons/9/9c/Repin-Ivan_and_Son_detail.jpg",
     tags: ["politics", "russia", "tragedy"],
+    isExplicit: true,
     period: "renaissance",
     year: 1547
   },
@@ -151,7 +155,7 @@ export const historicalFacts = [
     period: "renaissance",
     year: 1523
   },
-  
+
   // Early Modern
   {
     id: 16,
