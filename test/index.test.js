@@ -34,3 +34,11 @@ test('getAllFacts should return all facts', () => {
 
     expect(facts.length).toBe(count)
 })
+
+test('getAllFamilyFriendlyFacts should return all non-explicit facts', () => {
+    const facts = historicalFacts.getAllFamilyFriendlyFactsOnly()
+
+    for (const fact of facts) {
+        expect(fact.isExplicit).toBe(false)
+    }
+})
