@@ -128,3 +128,16 @@ describe('getFactsAfterYear', () => {
         }
     })
 })
+
+describe('getAllFactsSortedAscendingByYear', () => {
+
+    test('should throw an error if there are no facts available', () => {
+
+        const emptyArray = historicalFacts.facts
+        historicalFacts.facts = []
+    })
+    function emptyArray() {
+        historicalFacts.getAllFactsSortedAscendingByYear()
+    }
+    expect(emptyArray).toThrow('No historical facts available')
+})
