@@ -222,7 +222,7 @@ export class RandomHistoricalFacts {
    * Returns all available tags.
    * @returns {Array<string>} An array of all available tags.
    */
-  getAllFactsTags() {
+  getAllFactTags() {
     let result = new Set() // Store result in array to avoid duplicates
 
     for (const fact of this.facts) {

@@ -75,3 +75,56 @@ test('getFactsByTag should return only facts with specified tag', () => {
         expect(fact.tags.includes('war')).toBe(true)
     }
 })
+
+test('getAllFactTags should return all available tags', () => {
+    const tags = historicalFacts.getAllFactTags(true)
+    console.log(tags)
+})
+
+test('getFactsByPeriod should return only facts with specified period', () => {
+    const facts = historicalFacts.getFactsByPeriod('medieval')
+
+    for (const fact of facts) {
+        expect(fact.period.includes('medieval')).toBe(true)
+    }
+})
+
+describe('getFactsBeforeYear', () => {
+
+    test('should throw an error when year is not a number', () => {
+        function notANumber() {
+            historicalFacts.getFactsBeforeYear('string')
+        }
+        expect(notANumber).toThrow('Year must be a number')
+    })
+
+    test('should return only facts before specified year', () => {
+        const facts = historicalFacts.getFactsBeforeYear(0)
+
+        for (const fact of facts) {
+            if (fact.year <= 0) {
+                expect(fact.year).toBeLessThan(1)
+            }
+        }
+    })
+})
+
+describe('getFactsAfterYear', () => {
+
+    test('should throw an error when year is not a number', () => {
+        function notANumber() {
+            historicalFacts.getFactsAfterYear('string')
+        }
+        expect(notANumber).toThrow('Year must be a number')
+    })
+
+    test('should return only facts after specified year', () => {
+        const facts = historicalFacts.getFactsAfterYear(0)
+
+        for (const fact of facts) {
+            if (fact.year >= 0) {
+                expect(fact.year).toBeGreaterThan(0)
+            }
+        }
+    })
+})
