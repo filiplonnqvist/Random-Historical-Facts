@@ -27,3 +27,10 @@ test('getRandomFamilyFriendlyFact should return a random fact without explicit c
         expect(fact.isExplicit).toBe(false)
     }
 })
+
+test('getAllFacts should return all facts', () => {
+    const facts = historicalFacts.getAllFacts()
+    const count = historicalFacts.getFactsCount()
+
+    expect(facts.length).toBe(count)
+})
