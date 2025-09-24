@@ -138,11 +138,12 @@ describe('getAllFactsSortedAscendingByYear', () => {
 
     test('should throw an error if there are no facts available', () => {
 
-        const emptyArray = historicalFacts.facts
-        historicalFacts.facts = []
+        const testInstance = new RandomHistoricalFacts()
+        testInstance.facts = []
+
 
         function emptyArrayError() {
-            historicalFacts.getAllFactsSortedAscendingByYear(emptyArray)
+            testInstance.getAllFactsSortedAscendingByYear()
         }
         expect(emptyArrayError).toThrow('No historical facts available')
     })
