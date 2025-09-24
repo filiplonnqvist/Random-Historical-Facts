@@ -77,8 +77,13 @@ test('getFactsByTag should return only facts with specified tag', () => {
 })
 
 test('getAllFactTags should return all available tags', () => {
-    const tags = historicalFacts.getAllFactTags(true)
-    console.log(tags)
+    const tags = historicalFacts.getAllFactTags()
+    expect(Array.isArray(tags)).toBe(true)
+    expect(tags.length).toBeGreaterThan(0)
+
+    for (const tag of tags) {
+        expect(typeof tag === 'string').toBe(true)
+    }
 })
 
 test('getFactsByPeriod should return only facts with specified period', () => {
@@ -135,9 +140,10 @@ describe('getAllFactsSortedAscendingByYear', () => {
 
         const emptyArray = historicalFacts.facts
         historicalFacts.facts = []
+
+        function emptyArrayError() {
+            historicalFacts.getAllFactsSortedAscendingByYear(emptyArray)
+        }
+        expect(emptyArrayError).toThrow('No historical facts available')
     })
-    function emptyArray() {
-        historicalFacts.getAllFactsSortedAscendingByYear()
-    }
-    expect(emptyArray).toThrow('No historical facts available')
 })
