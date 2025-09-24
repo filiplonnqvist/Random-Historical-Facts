@@ -147,4 +147,37 @@ describe('getAllFactsSortedAscendingByYear', () => {
         }
         expect(emptyArrayError).toThrow('No historical facts available')
     })
+
+    test('should return all historical facts sorted ascending by year', () => {
+
+        const facts = historicalFacts.getAllFactsSortedAscendingByYear()
+
+        for (let i = 1; i < facts.length; i++ ) {
+            expect(facts[i-1].year <= facts[i].year).toBe(true)
+        }
+    })
+})
+
+describe('getAllFactsSortedDescendingByYear', () => {
+
+    test('should throw an error if there are no facts available', () => {
+
+        const testInstance = new RandomHistoricalFacts()
+        testInstance.facts = []
+
+
+        function emptyArrayError() {
+            testInstance.getAllFactsSortedDescendingByYear()
+        }
+        expect(emptyArrayError).toThrow('No historical facts available')
+    })
+
+    test('should return all historical facts sorted descending by year', () => {
+
+        const facts = historicalFacts.getAllFactsSortedDescendingByYear()
+
+        for (let i = 1; i < facts.length; i++ ) {
+            expect(facts[i-1].year >= facts[i].year).toBe(true)
+        }
+    })
 })
