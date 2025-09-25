@@ -1,10 +1,8 @@
-# Reflektioner
+# Kapitel 2: Namngivning
 
-## Kapitel 2: Namngivning
+Detta avsnitt behandlar kapitel 2 från Clean Code om namngivning och hur det bör implementeras i kod. Tabell och reflektion följer nedan.
 
-Efter att ha läst kapitel 2 
-
-### Tabell
+## Tabell
 
 
 | Namn | Förklaring | Reflektion och regler från Clean Code |
@@ -17,7 +15,15 @@ Efter att ha läst kapitel 2
 
 ---
 
-# Kapitelreflektion kap 3 (Funktioner)
+## Reflektion
+
+Efter att ha läst kapitel 2 i Clean Code har jag börjat reflektera betydligt mer kring namngivning än tidigare. Under årskurs ett, när vi lärde oss grunderna i programmering, använde vi ofta förenklade och svårtydda namn på loopar och metoder. Fokus låg då på att lösa uppgiften för vår egen skull snarare än att förbereda koden för framtida utvecklare. I slutet av årskurs ett började jag tänka i nya banor, och kapitel 2 har nu ytterligare fördjupat min förståelse för vikten av genomtänkt namngivning.
+
+Den främsta lärdomen från kapitlet, vilket också framgår av tabellen ovan, är hur lätt det är att blanda ihop sina egna behov med framtida utvecklares faktiska behov. Principen **"Avoid Disinformation"** blev särskilt tydlig när jag analyserade mitt klassnamn `RandomHistoricalFacts`, där ordet "Random" kan vilseleda användare om modulens fulla kapacitet. På liknande sätt visar parametrar som `desiredTag` hur jag lagt till onödig kontext för min egen förståelse, vilket bryter mot **"Make Meaningful Distinctions"**. Robert C. Martin påpekar att namngivning ska vara för läsarens skull, inte för att lugna utvecklarens egen osäkerhet - en insikt jag tar med mig.
+
+En styrka jag identifierat är min konsekventa namngivning, vilket bekräftas av principen **"Pick One Word per Concept"**. Mina validate-metoder följer alla samma mönster och beteende, vilket skapar förutsägbarhet i koden. Jag har medvetet behållit vissa "mindre bra" namngivningar i projektet för att visa min medvetenhet om förbättringspotential. Framöver kommer jag särskilt fokusera på att ifrågasätta varje ord i mina namn - tillför det verklig information eller är det bara mental säkerhet för mig själv? Denna självkritiska approach kommer göra min kod mer läsbar och professionell.
+
+# Kapitel 3: Funktioner
 - Skapa tabell med dina 5 längsta metoder
 - Kolumner: Namn | Antal rader kod | Reflektion
 - Analysera enligt kapitel 3
@@ -91,8 +97,11 @@ när en funktion lovar att göra en sak men gör fler saker i smyg,
 
 
 
-Personligen håller jag inte med om att for loopar i for loopar är dåligt. Jag tycker det är tydligt och gör det snarare rörigare att skapa privata metoder som man behöber leta upp för att förstå. 
 
 # Reflektion över egen kodkvalitet
 - Halvsidig reflektion om dina erfarenheter
 - Använd begrepp från boken
+
+Min styrka ligger i hur jag hanterat refaktorisering och hur jag effiktiviserat min kod baserat på lärdomar från boken. Exempel är hur jag bryter ut delar av metoder i privata metoder för att förenkla flödet och minska mängden kod. Detta gör det mer lättläsligt, men stället också högre krav på kodaren att använda bra namngivning och följa strukturen väl. Innan har jag haft en tendens att skriva långa metoder som behanldar många saker, och på sin höjd bryta ut validering till en separat modul eftersom det ofta blir mycket repetition och brytar mot DRY principen. 
+
+Personligen håller jag dock inte med om att for loopar i for loopar är dåligt. Jag tycker det är tydligt och gör det snarare rörigare att skapa privata metoder som man behöber leta upp för att förstå. Jag tycker dock generellt sett att bokens innehåll har varit intressnt och lärorikt, men det finns svagheter som jag anser försvårar för såväl kodaren som framtida utvecklare. Även om namngivning och tydlighet blir bättre genom att följa bokens pricniper så skapar det andra problem. Mängden kod kan tvärtom öka. Det ökar också risken för missförstånd eftersom varje publik metod riskerar att ha en eller flera privata metoder vars innehåll måste analyseras innan man som utvecklare kan förstå flödet. Med bra namngivning kan detta naturligtvis kommas runt, men det ställer höga krav på kodaren och jag är inte helt övertygad om att det alltid är en bästa rpincipen att följa. 
