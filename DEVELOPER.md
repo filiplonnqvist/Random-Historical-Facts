@@ -7,6 +7,7 @@ This document describes how to contribute to the Random Historical Facts NPM pac
 ### Prerequisites
 - **Node.js**: Version 16.0.0 or higher
 - **npm**: Version 7.0.0 or higher
+- **Jest**: ^29 (installed as devDependency)
 
 ### Setup
 
@@ -22,7 +23,7 @@ This document describes how to contribute to the Random Historical Facts NPM pac
    ```
 4. **Run tests**
    ```bash
-   npm test
+   npm test   # runs Jest
    ```
 
 ## Branch Strategy
@@ -65,7 +66,7 @@ git push origin feature/your-feature-name
 ## Testing
 
 ```bash
-# Run all tests
+# Run all Jest tests
 npm test
 ```
 
