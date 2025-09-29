@@ -252,17 +252,30 @@ export class RandomHistoricalFacts {
    */
   getFactsByPeriod(desiredPeriod) {
     let result = []
-
-    for (const fact of this.facts) { // Loop through each fact
-      if (this.#isMatchingOutput(fact.period, desiredPeriod)) { // Check if the existing period matches the desired period input
+    for (const fact of this.facts) {
+      if (this.#isMatchingOutput(fact.period, desiredPeriod)) {
         result.push({ ...fact })
       }
     }
     if (result.length === 0) {
-      throw new Error('Period not found. Please choose between "prehistoric", "ancient", "middle ages", "renaissance" or "early modern"')
+      throw new Error(`Period not found. Please choose between: ${this.#getAllFactPeriods().join(', ')}`)
     }
     return result
   }
+
+  /**
+   * Returns all available periods.
+   * @returns {Array<string>} An array of all available periods.
+   */
+  #getAllFactPeriods() {
+    let result = new Set()
+
+    for (const fact of this.facts) {
+      result.add(fact.period)
+    }
+    return Array.from(result)
+  }
+
 
   /**
    * Returns historical facts before a specific year.
@@ -291,7 +304,6 @@ export class RandomHistoricalFacts {
    */
   #sortFactsBeforeYear(year, before = true) {
     this.#validateYear(year)
-
     const result = []
 
     for (const fact of this.facts) {
