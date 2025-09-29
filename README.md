@@ -24,7 +24,6 @@ console.log(fact.fact);
 Perfect for:
 - **Loading Screens** - Users learn something new instead of staring at spinners
 - **Educational Apps** - Ready-made historical content, no research needed
-- **Trivia Games** - 20+ verified historical facts as question source
 - **Daily Content** - "Fact of the Day" features with zero effort
 - **Engagement Boost** - Keep users entertained during wait times
 
@@ -38,7 +37,7 @@ Perfect for:
 - ⚡ **Lightning Fast** - No runtime dependencies, pure JavaScript
 - 🔍 **Flexible Queries** - 11 different ways to access your content
 
-## 📦 Installation
+## Installation
 
 ```bash
 # Clone the repository
@@ -53,36 +52,33 @@ npm install
 
 **Usage:** Copy the `src` folder to your project and import!
 
-## 💡 Quick Examples
+## Example
 
 ### Create a "Did You Know?" Loading Screen
-```javascript
+``` javascript
+import { RandomHistoricalFacts } from 'random-historical-facts';
+
 const facts = new RandomHistoricalFacts();
 
-// Get a family-friendly fact for your loading screen
-const fact = facts.getRandomFamilyFriendlyFact();
-
-// Display it beautifully
-console.log(`💡 ${fact.fact}`);
-console.log(`📅 Year: ${Math.abs(fact.year)} ${fact.year < 0 ? 'BC' : 'AD'}`);
-console.log(`🏛️ Period: ${fact.period}`);
+// Create an engaging loading screen
+function showLoadingScreen() {
+  const fact = facts.getRandomFamilyFriendlyFact();
+  
+  document.getElementById('loading-container').innerHTML = `
+    <div class="loading-screen">
+      <div class="spinner"></div>
+      <div class="fact-container">
+        <h3>Did You Know?</h3>
+        <img src="${fact.imageUrl}" alt="Historical image" />
+        <p>${fact.fact}</p>
+        <small>${fact.period} • ${Math.abs(fact.year)} ${fact.year < 0 ? 'BC' : 'AD'}</small>
+      </div>
+    </div>
+  `;
+}
 ```
 
-### Build a History Quiz
-```javascript
-const facts = new RandomHistoricalFacts();
-
-// Get all war-related facts for a military history quiz
-const warFacts = facts.getFactsByTag('war');
-
-// Or get medieval facts for a Middle Ages theme
-const medievalFacts = facts.getFactsByPeriod('medieval');
-
-// Sort facts chronologically for a timeline game
-const timeline = facts.getAllFactsSortedAscendingByYear();
-```
-
-## 📊 What You Get
+## What You Get
 
 Each fact comes as a rich data object:
 
@@ -98,7 +94,7 @@ Each fact comes as a rich data object:
 }
 ```
 
-## 📖 Complete API Reference
+## Complete API Reference
 
 | Method | What It Does | Perfect For |
 |--------|--------------|------------|
@@ -120,7 +116,7 @@ Each fact comes as a rich data object:
 ### Historical Periods
 `prehistoric` • `ancient` • `medieval` • `renaissance` • `early modern` • `enlightenment`
 
-## 🛡️ Error Handling
+## Error Handling
 
 The module won't crash your app - it handles errors gracefully:
 
@@ -134,10 +130,9 @@ try {
 }
 ```
 
-## 🧪 Testing & Quality
+## Testing & Quality
 
 ✅ **19 comprehensive tests** - Every method is tested  
-✅ **Clean Code principles** - Following Robert C. Martin's guidelines  
 ✅ **JSDoc documented** - Full intellisense support  
 ✅ **No runtime dependencies** - Won't bloat your project  
 
@@ -146,28 +141,16 @@ try {
 npm test
 ```
 
-### Screenshots
+<p align="left">
+  <img src="img/test-result.png" alt="All tests passing" width="600"><br/>
+  <i>All tests passing (19/19)</i>
+</p>
 
-*Console output in action:*
-![Console Output](screenshots/console-output.png)
-
-*All tests passing:*
-![Test Results](screenshots/test-results.png)
-
-## 📚 Academic Project
-
-Created as part of Introduction to Software Quality (1DV610) at Linnaeus University, demonstrating Clean Code principles and comprehensive testing strategies.
-
-**Requirements exceeded:**
-- 11 public methods (required: 5)
-- 250+ lines of code (required: 200)
-- Full test coverage with detailed test report
-
-## 📝 License
+## License
 
 MIT License - Use freely in your projects!
 
-## 👤 Author
+## Author
 
 **Filip Lönnqvist**
 - GitHub: [@filiplonnqvist](https://github.com/filiplonnqvist)
@@ -175,10 +158,6 @@ MIT License - Use freely in your projects!
 - Course: Software Quality (1DV610)
 
 ---
-
-<p align="center">
-  Made with ❤️ and ☕ in Sweden
-</p>
 
 <p align="center">
   <i>Transform your loading screens from boring to brilliant!</i>
