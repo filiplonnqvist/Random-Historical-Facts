@@ -1,5 +1,5 @@
 /**
- * @file Main module for managing and retrieving random historical facts.
+ * @file Main module for managing random historical facts.
  * @module src/RandomHistoricalFacts
  * @author Filip Lönnqvist <fl223km@student.lnu.se>
  * @version 1.1.0
