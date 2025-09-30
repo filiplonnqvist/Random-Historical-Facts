@@ -1,6 +1,6 @@
 {
   "name": "random-historical-facts",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Random historical facts to entertain users while waiting",
   "type": "module",
   "main": "src/index.js",
