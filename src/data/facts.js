@@ -2,7 +2,8 @@
  * @file Data file containing interesting historical facts.
  * @module data/facts
  * @author Filip Lönnqvist <fl223km@student.lnu.se>
- * @version 1.0.0
+ * @version 1.1.0
+ * @license MIT
  */
 
 /**
