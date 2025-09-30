@@ -42,7 +42,7 @@ git checkout -b feature/your-feature-name
 ### 2. Make your changes
 - Follow existing code patterns
 - Add facts to `src/data/facts.js`
-- Update methods in `src/index.js` if needed
+- Update methods in `src/RandomHistoricalFacts.js` if needed
 
 ### 3. Test your changes
 ```bash
@@ -89,9 +89,10 @@ npx eslint src/
 ```
 Random-Historical-Facts/
 ├── src/
-│   ├── index.js          # Main module
+│   ├── index.js                    # Export module
+│   ├── RandomHistoricalFacts.js    # Main class implementation
 │   └── data/
-│       └── facts.js      # Historical facts
+│       └── facts.js                # Historical facts
 ├── test/
 │   └── index.test.js     # Tests
 └── package.json
