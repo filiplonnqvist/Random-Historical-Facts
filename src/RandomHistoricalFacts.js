@@ -27,15 +27,7 @@ export class RandomHistoricalFacts {
    * @returns {Object} A random historical fact.
    */
   getRandomFact() {
-    return this.#findRandomFact(true)
-  }
-
-  /**
-   * Returns a random family-friendly historical fact.
-   * @returns {Object} A random family-friendly historical fact.
-   */
-  getRandomFamilyFriendlyFact() {
-    return this.#findRandomFact(false)
+    return this.#getRandomFactFromFacts()
   }
 
   /**
@@ -44,22 +36,14 @@ export class RandomHistoricalFacts {
    * @param {boolean} includeAll - Parameter which decides whether or not you want explicit content.
    * @returns {Object} A random historical fact with or without explicit content.
    */
-  #findRandomFact(includeAll = true) {
+  #getRandomFactFromFacts() {
     this.#validateFactsAvailability()
 
-    const familyFriendlyFacts = this.#findFamilyFriendlyFacts()
-
-    const randomIndex = Math.floor(Math.random() * this.facts.length) // Index for random fact
-    const randomIndexFamilyFriendly = Math.floor(Math.random() * familyFriendlyFacts.length) // Index for random family friendly fact
-
-    if (!includeAll) { // If explicit content is not allowed, return a random family friendly fact
-      return { ...familyFriendlyFacts[randomIndexFamilyFriendly] }
-    } else {
-      return { ...this.facts[randomIndex] }
-    }
+    const randomIndex = Math.floor(Math.random() * this.facts.length)
+    return { ...this.facts[randomIndex] }
   }
 
-    /**
+  /**
    * Private method to validate if there are any historical facts available.
    * @private
    * @throws {Error} If there are no historical facts available.
@@ -68,6 +52,31 @@ export class RandomHistoricalFacts {
     if (this.facts.length === 0) {
       throw new Error('No historical facts available')
     }
+  }
+
+  /**
+   * Returns a random family-friendly historical fact.
+   * @returns {Object} A random family-friendly historical fact.
+   */
+  getRandomFamilyFriendlyFact() {
+    return this.#getRandomFamilyFriendlyFactFromFacts()
+  }
+
+  /**
+   * Private method to find a random fact with or without explicit content.
+   * @private
+   * @param {boolean} includeAll - Parameter which decides whether or not you want explicit content.
+   * @returns {Object} A random historical fact with or without explicit content.
+   */
+  #getRandomFamilyFriendlyFactFromFacts() {
+    this.#validateFactsAvailability()
+
+    const familyFriendlyFacts = this.#findFamilyFriendlyFacts()
+
+    const randomIndexFamilyFriendly = Math.floor(Math.random() * familyFriendlyFacts.length)
+
+      return { ...familyFriendlyFacts[randomIndexFamilyFriendly] }
+
   }
 
   /**
@@ -338,33 +347,23 @@ export class RandomHistoricalFacts {
    * @returns {Array<Object>} An array of historical facts sorted by year in ascending order.
    */
   getAllFactsSortedAscendingByYear() {
-    return this.#sortFactsByYear(true)
+    this.#validateFactsAvailability()
 
+    const result = [...this.facts]
+    result.sort((a, b) => a.year - b.year)
+    return result
   }
+
 
   /**
    * Returns historical facts sorted by year in descending order.
    * @returns {Array<Object>} An array of historical facts sorted by year in descending order.
    */
   getAllFactsSortedDescendingByYear() {
-    return this.#sortFactsByYear(false)
-  }
-
-  /**
-   * Private method to sort facts by year in ascending or descending order.
-   * @private
-   * @param {boolean} ascending - If true, sort in ascending order; if false, sort in descending order.
-   * @returns {Array<Object>} An array of historical facts sorted by year.
-   */
-  #sortFactsByYear(ascending = true) {
     this.#validateFactsAvailability()
 
     const result = [...this.facts]
-    if (ascending) {
-      result.sort((a, b) => a.year - b.year)
-    } else {
-      result.sort((a, b) => b.year - a.year)
-    }
+    result.sort((a, b) => b.year - a.year)
     return result
   }
 }
