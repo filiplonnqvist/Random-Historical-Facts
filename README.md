@@ -4,7 +4,6 @@
 
 ![GitHub](https://img.shields.io/github/license/filiplonnqvist/Random-Historical-Facts)
 ![tests](https://img.shields.io/badge/tests-19%20passing-brightgreen)
-![facts](https://img.shields.io/badge/historical%20facts-20%2B-orange)
 
 Your users will love discovering fascinating historical facts while they wait! This JavaScript module delivers carefully curated historical content complete with stunning images and smart categorization - perfect for making your app both educational and engaging.
 
@@ -54,30 +53,6 @@ npm install
 
 ## Example
 
-### Create a "Did You Know?" Loading Screen
-``` javascript
-import { RandomHistoricalFacts } from 'random-historical-facts';
-
-const facts = new RandomHistoricalFacts();
-
-// Create an engaging loading screen
-function showLoadingScreen() {
-  const fact = facts.getRandomFamilyFriendlyFact();
-  
-  document.getElementById('loading-container').innerHTML = `
-    <div class="loading-screen">
-      <div class="spinner"></div>
-      <div class="fact-container">
-        <h3>Did You Know?</h3>
-        <img src="${fact.imageUrl}" alt="Historical image" />
-        <p>${fact.fact}</p>
-        <small>${fact.period} • ${Math.abs(fact.year)} ${fact.year < 0 ? 'BC' : 'AD'}</small>
-      </div>
-    </div>
-  `;
-}
-```
-
 ## What You Get
 
 Each fact comes as a rich data object:
@@ -93,6 +68,20 @@ Each fact comes as a rich data object:
   year: -9600                                     // BC/AD sorting
 }
 ```
+
+### Create a "Did You Know?" Loading Screen
+``` javascript
+import { RandomHistoricalFacts } from 'random-historical-facts'
+
+const fact = new RandomHistoricalFacts().getRandomFamilyFriendlyFact()
+
+document.getElementById('loading').innerHTML = `
+  <h3>Did You Know?</h3>
+  <img src="${fact.imageUrl}" alt="Historical image" />
+  <p>${fact.fact}</p>
+`
+```
+
 
 ## Complete API Reference
 
@@ -111,7 +100,7 @@ Each fact comes as a rich data object:
 | `getFactsCount()` | Total number of facts | Pagination |
 
 ### Available Tags
-`ancient` • `medieval` • `war` • `science` • `culture` • `architecture` • `invention` • `politics` • `religion` • and more!
+`america` • `americas` • `architecture` • `art` • `battle` • `beverage` • `britain` • `catastrophe` • `classical` • `culture` • `disease` • `economy` • `egypt` • `emperor` • `emporer` • `england` • `europe` • `exploration` • `food` • `france` • `greece` • `invention` • `king` • `london` • `medicine` • `music` • `painting` • `pandemic` • `pirate` • `politics` • `pyramid` • `queen` • `religion` • `rome` • `russia` • `scandinavia` • `science` • `technology` • `temple` • `tragedy` • `turkey` • `vikings` • `war`
 
 ### Historical Periods
 `prehistoric` • `ancient` • `medieval` • `renaissance` • `early modern` • `enlightenment`
@@ -133,18 +122,11 @@ try {
 ## Testing & Quality
 
 ✅ **19 comprehensive tests** - Every method is tested  
-✅ **JSDoc documented** - Full intellisense support  
-✅ **No runtime dependencies** - Won't bloat your project  
 
 ```bash
 # Run the test suite
 npm test
 ```
-
-<p align="left">
-  <img src="img/test-result.png" alt="All tests passing" width="600"><br/>
-  <i>All tests passing (19/19)</i>
-</p>
 
 ## License
 

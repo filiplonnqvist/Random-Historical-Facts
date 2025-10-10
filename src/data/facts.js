@@ -50,7 +50,7 @@ export const historicalFacts = [
     id: 3,
     fact: "Did you know that the Roman Emperor Caligula loved his horse Incitatus so much that he gave it a marble stable, servants, and even planned to make it a senator?",
     imageUrl: "https://upload.wikimedia.org/wikipedia/commons/0/0e/Portrait_Head_of_Caligula_-_Getty_Museum_%2872.AA.155%29.jpg",
-    tags: ["emporer", "rome", "culture", "politics"],
+    tags: ["emperer", "rome", "culture", "politics"],
     isExplicit: false,
     period: "ancient",
     year: 40

@@ -13,22 +13,10 @@ Denna testrapport sammanfattar resultatet av alla **automatiska tester** av NPM-
 
 ## Automatiska enhetstester
 
-| Testad metod | Testbeskrivning | Resultat |
-|--------------|------------------|---------|
-| Constructor | Validering av instansskapande | ✅ Godkänd |
-| getRandomFact | Returnerar slumpmässigt faktaobjekt | ✅ Godkänd |
-| getRandomFamilyFriendlyFact | Returnerar endast slumpmässigt icke-explicit faktaobjekt | ✅ Godkänd |
-| getAllFacts | Returnerar alla faktaobjekt | ✅ Godkänd |
-| getAllFamilyFriendlyFactsOnly | Returnerar alla icke-explicita faktaobjekt | ✅ Godkänd |
-| getFactsCount | Returnerar totalt antal faktaobjekt | ✅ Godkänd |
-| getFactById | ID-validering och hämtning | ✅ Godkänd (2 tester) |
-| getFactsByTag | Returnerar fakta filtrerade på taggar | ✅ Godkänd |
-| getAllFactTags | Returnerar array med alla tillgängliga tagg | ✅ Godkänd |
-| getFactsByPeriod | Returnerar faktaobjekt filtrerade på epok | ✅ Godkänd |
-| getFactsBeforeYear | Årsvalidering och filtrering av faktumobjekt efter år | ✅ Godkänd (2 tester) |
-| getFactsAfterYear | Årsvalidering och filtrering av faktumobjekt efter år | ✅ Godkänd (2 tester) |
-| getAllFactsSortedAscendingByYear | Stigande sortering med felhantering | ✅ Godkänd (2 tester) |
-| getAllFactsSortedDescendingByYear | Fallande sortering med felhantering | ✅ Godkänd (2 tester) |
+<p align="left">
+  <img src="../img/test-result.png" alt="All tests passing" width="600"><br/>
+  <i>All tests passing (19/19)</i>
+</p>
 
 ## Testanalys
 
