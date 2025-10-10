@@ -21,40 +21,6 @@ export class RandomHistoricalFacts {
     }
   }
 
-  /**
-   * Private method to validate if there are any historical facts available.
-   * @private
-   * @throws {Error} If there are no historical facts available.
-   */
-  #validateFactsAvailability() {
-    if (this.facts.length === 0) {
-      throw new Error('No historical facts available')
-    }
-  }
-
-  /**
-   * Private method to validate the year parameter.
-   * @private
-   * @param {number} year - The year to validate.
-   * @throws {Error} If the year is not a number.
-   */
-  #validateYear(year) {
-    if (typeof year !== 'number') {
-      throw new Error('Year must be a number')
-    }
-  }
-
-  /**
-   * Private method to validate the ID parameter.
-   * @private
-   * @param {number} id - The ID to validate.
-   * @throws {Error} If the ID is not a positive number.
-   */
-  #validateId(id) {
-    if (typeof id !== 'number' || isNaN(id) || id <= 0) {
-      throw new Error('ID must be a positive number')
-    }
-  }
 
   /**
    * Returns a random historical fact.
@@ -90,6 +56,17 @@ export class RandomHistoricalFacts {
       return { ...familyFriendlyFacts[randomIndexFamilyFriendly] }
     } else {
       return { ...this.facts[randomIndex] }
+    }
+  }
+
+    /**
+   * Private method to validate if there are any historical facts available.
+   * @private
+   * @throws {Error} If there are no historical facts available.
+   */
+  #validateFactsAvailability() {
+    if (this.facts.length === 0) {
+      throw new Error('No historical facts available')
     }
   }
 
@@ -171,17 +148,29 @@ export class RandomHistoricalFacts {
     return null
   }
 
+    /**
+   * Private method to validate the ID parameter.
+   * @private
+   * @param {number} id - The ID to validate.
+   * @throws {Error} If the ID is not a positive number.
+   */
+  #validateId(id) {
+    if (typeof id !== 'number' || isNaN(id) || id <= 0) {
+      throw new Error('ID must be a positive number')
+    }
+  }
+
   /**
    * Returns historical facts that match a specific tag.
-   * @param {string} desiredTag - The tag to match.
+   * @param {string} searchedTag - The tag to match.
    * @returns {Array<Object>} An array of historical facts that match the tag.
    */
-  getFactsByTag(desiredTag) {
+  getFactsByTag(searchedTag) {
     let result = []
 
     for (const fact of this.facts) {
       if (!fact.tags) continue
-      result = this.#getMatchingTags(result, fact, desiredTag) // Check if any tag matches the desired tag
+      result = this.#getMatchingTags(result, fact, searchedTag) // Check if any tag matches the desired tag
     }
     if (result.length === 0) {
       throw new Error('Tag not found')
@@ -194,12 +183,12 @@ export class RandomHistoricalFacts {
    * @private
    * @param {Array<Object>} result - The array to store matching facts.
    * @param {Object} fact - The historical fact to check.
-   * @param {string} desiredTag - The tag to match.
+   * @param {string} searchedTag - The tag to match.
    * @returns {Array<Object>} The updated array of matching facts.
    */
-  #getMatchingTags(result, fact, desiredTag) {
+  #getMatchingTags(result, fact, searchedTag) {
     for (const factTag of fact.tags) {
-      if (this.#isMatchingOutput(factTag, desiredTag)) { // Check if the tag matches the desired tag
+      if (this.#isMatchingStrings(factTag, searchedTag)) { // Check if the tag matches the desired tag
         result.push({ ...fact })
         break
       }
@@ -210,12 +199,12 @@ export class RandomHistoricalFacts {
   /**
    * Private method to check if two strings match (case-insensitive and trimmed).
    * @private
-   * @param {string} existingOutput - The existing output string.
-   * @param {string} desiredOutput - The desired output string.
+   * @param {string} string - The existing string.
+   * @param {string} searchedString - The desired string.
    * @returns {boolean} True if the strings match, false otherwise.
    */
-  #isMatchingOutput(existingOutput, desiredOutput) {
-    return existingOutput.toLowerCase().trim() === desiredOutput.toLowerCase().trim()
+  #isMatchingStrings(string, searchedString) {
+    return string.toLowerCase().trim() === searchedString.toLowerCase().trim()
   }
 
   /**
@@ -247,13 +236,13 @@ export class RandomHistoricalFacts {
 
   /**
    * Returns historical facts that match a specific period.
-   * @param {string} desiredPeriod - The period to match.
+   * @param {string} searchedPeriod - The period to match.
    * @returns {Array<Object>} An array of historical facts that match the period.
    */
-  getFactsByPeriod(desiredPeriod) {
+  getFactsByPeriod(searchedPeriod) {
     let result = []
     for (const fact of this.facts) {
-      if (this.#isMatchingOutput(fact.period, desiredPeriod)) {
+      if (this.#isMatchingStrings(fact.period, searchedPeriod)) {
         result.push({ ...fact })
       }
     }
@@ -276,23 +265,13 @@ export class RandomHistoricalFacts {
     return Array.from(result)
   }
 
-
   /**
    * Returns historical facts before a specific year.
    * @param {number} year - The year to check.
    * @returns {Array<Object>} An array of historical facts before the specified year.
    */
   getFactsBeforeYear(year) {
-    return this.#sortFactsBeforeYear(year, true)
-  }
-
-  /**
-   * Returns historical facts after a specific year.
-   * @param {number} year - The year to check.
-   * @returns {Array<Object>} An array of historical facts after the specified year.
-   */
-  getFactsAfterYear(year) {
-    return this.#sortFactsBeforeYear(year, false)
+    return this.#filterFactsBeforeYear(year)
   }
 
   /**
@@ -302,20 +281,57 @@ export class RandomHistoricalFacts {
    * @param {boolean} before - If true, sort before the year; if false, sort after.
    * @returns {Array<Object>} An array of historical facts sorted by the specified year.
    */
-  #sortFactsBeforeYear(year, before = true) {
+  #filterFactsBeforeYear(year) {
     this.#validateYear(year)
     const result = []
 
     for (const fact of this.facts) {
-      if (before && fact.year <= year) {
-        result.push({ ...fact })
-      } else if (!before && fact.year >= year) {
+      if (fact.year <= year) {
         result.push({ ...fact })
       }
     }
     return result
   }
 
+  /**
+   * Private method to validate the year parameter.
+   * @private
+   * @param {number} year - The year to validate.
+   * @throws {Error} If the year is not a number.
+   */
+  #validateYear(year) {
+    if (typeof year !== 'number') {
+      throw new Error('Year must be a number')
+    }
+  }
+
+  /**
+   * Returns historical facts after a specific year.
+   * @param {number} year - The year to check.
+   * @returns {Array<Object>} An array of historical facts after the specified year.
+   */
+  getFactsAfterYear(year) {
+    return this.#filterFactsAfterYear(year)
+  }
+
+      /**
+   * Private method to sort facts before or after a specific year.
+   * @private
+   * @param {number} year - The year to check.
+   * @param {boolean} before - If true, sort before the year; if false, sort after.
+   * @returns {Array<Object>} An array of historical facts sorted by the specified year.
+   */
+  #filterFactsAfterYear(year) {
+    this.#validateYear(year)
+    const result = []
+
+    for (const fact of this.facts) {
+      if (fact.year >= year) {
+        result.push({ ...fact })
+      }
+    }
+    return result
+  }
 
   /**
    * Returns historical facts sorted by year in ascending order.
